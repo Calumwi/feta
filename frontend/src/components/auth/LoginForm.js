@@ -36,6 +36,16 @@ const LogInForm = ({ navigate }) => {
 
 
     return (
+      // <div>
+      //   <span class="title">
+      //     Your account has been successfully created
+      //   </span>
+      //   <br/>
+      //   <br/>
+      //   <form onSubmit={handleSubmit}>
+      //   <button id="login-page-btn" type="submit" value="Submit">Log-In</button>
+      //   </form>
+      // </div>
       <form onSubmit={handleSubmit}>
         <input placeholder='Email' id="email" type='text' value={ email } onChange={handleEmailChange} />
         <input placeholder='Password' id="password" type='password' value={ password } onChange={handlePasswordChange} />
