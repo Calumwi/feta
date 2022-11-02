@@ -16,7 +16,7 @@ input, button {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
-/* contW: 900px;
+/* $contW: 900px;
 $imgW: 260px;
 $formW: $contW - $imgW;
 $switchAT: 1.2s;
@@ -26,11 +26,12 @@ $btnH: 36px;
 
 $diffRatio: ($contW - $imgW) / $contW; */
 
-@mixin signUpActive {
+/* @mixin signUpActive {
   .cont.s--signup & {
     @content;
   }
-}
+} */
+
 
 .tip {
   font-size: 20px;
@@ -51,7 +52,7 @@ $diffRatio: ($contW - $imgW) / $contW; */
   position: relative;
   width: 640px;
   height: 100%;
-  transition: 1.2 ease-in-out;
+  transition: transform 1.2s ease-in-out;
   padding: 50px 30px 0;
 }
 
@@ -65,10 +66,10 @@ $diffRatio: ($contW - $imgW) / $contW; */
   padding-left: 260px;
   background: #fff;
   transition: transform 1.2s ease-in-out;
+}
 
-  @include signUpActive {
-    transform: translate3d(1.2s * -1,0,0);
-  }
+.cont.s--signup .sub-cont { 
+  transform: translate3d (-640px, 0, 0);
 }
 
 button {
@@ -102,7 +103,7 @@ button {
   height: 100%;
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
   background-size: cover;
-  transition: 1.2 ease-in-out;
+  transition: transform 1.2s ease-in-out;
 }
 
 .img:after {
@@ -115,14 +116,14 @@ button {
   background: rgba(0,0,0,0.6);
 }
 
-@include signUpActive {
-  .img:before {
-    transform: translate3d(640px,0,0);
-  }
+
+.cont.s--signup .img:before {
+  transform: translate3d(640px,0,0);
 }
 
+
 .img__text {
-  z-index: 2;
+  z-index: 5;
   position: absolute;
   left: 0;
   top: 50px;
@@ -130,32 +131,42 @@ button {
   padding: 0 20px;
   text-align: center;
   color: #fff;
-  transition: transform 1.2 ease-in-out;
+  transition: transform 1.2s ease-in-out;
 }
 
-.img h2 {
+.img__text:before {
+  z-index: 5;
+  position: absolute;
+  left: 0;
+  top: 50px;
+  width: 100%;
+  padding: 0 20px;
+  text-align: center;
+  color: #fff;
+  transition: transform 1.2s ease-in-out;
+}
+
+.img__text h2 {
   margin-bottom: 10px;
   font-weight: normal;
 }
 
-.img p {
+.img__text p {
   font-size: 14px;
   line-height: 1.5;
 }
 
-.img .m--up {
-
-  @include signUpActive {
-    transform: translateX(260px * 2);
+.cont.s--signup .img__text.m--up {
+  transform: translateX(520px);
   }
+
+
+.img__text.m--in  {
+  transform: translateX(-520px);
 }
 
-.img .m--in {
-  transform: translateX(260px * -2);
-
-  @include signUpActive {
-    transform: translateX(0);
-  }
+.cont.s--signup .img__text.m--in {
+   transform: translateX(0);
 }
   
 
@@ -197,22 +208,18 @@ button {
   transition: transform 1.2s;
 }
       
-.img__btn .m--in {
-  transform: translateY(36px*-2);
+.img__btn span.m--in {
+  transform: translateY(-72px);
+}
   
-  @include signUpActive {
-    transform: translateY(0);
-  }
+.cont.s--signup .img__btn span .m--in {
+  transform: translateY(0);
 }
       
-&.m--up {
-  @include signUpActive {
-    transform: translateY(36px * 2);
-  }
+.cont.s--signup .img__btn span.m--up {
+  transform: translateY(72px);
 }
     
-  
-
 
 h2 {
   width: 100%;
@@ -227,7 +234,7 @@ label {
   text-align: center;
 }
 
-label .span {
+label span {
   font-size: 12px;
   color: #cfcfcf;
   text-transform: uppercase;
@@ -258,7 +265,11 @@ input {
   text-transform: uppercase;
 }
 
-/* .fb-btn {
+.submit:hover {
+  background-color: rgba(219, 212, 212, 0.6)
+}
+
+.fb-btn {
   border: 2px solid #d3dae9;
   color: darken(#d3dae9, 20%);
 }
@@ -266,25 +277,26 @@ input {
 .fb-btn span {
   font-weight: bold;
   color: darken(#768cb6, 20%);
-} */
-
+}
 
 .sign-in {
-  transition-timing-function: ease-out;
+  transition-timing-function: 1.2s ease-out;
+}
 
-  @include signUpActive {
-    transition-timing-function: ease-in-out;
-    transition-duration: 1.2s;
-    transform: translate3d(640px,0,0);
-  }
+.cont.s--signup .sign-in { 
+  transition-timing-function: ease-in-out;
+  transition-duration: 1.2s;
+  transform: translate3d(-640px, 0, 0);
 }
 
 .sign-up {
-  transform: translate3d(900px * -1,0,0);
+  transform: translate3d(0, 0, 0);
+}
 
-  @include signUpActive {
-    transform: translate3d(0,0,0);
-  }
+.cont.s--signup .sign-up { 
+  transition-timing-function: ease-in-out;
+  transition-duration: 1.2s;
+  transform: translate3d(0, 0, 0);
 }
 
 .icon-link {
@@ -299,7 +311,7 @@ input {
   vertical-align: top;
 }
 
-.icon-link .--twitter {
+.icon-link img .--twitter {
   left: auto;
   right: 5px;
 }

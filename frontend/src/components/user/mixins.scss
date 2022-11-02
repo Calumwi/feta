@@ -1,0 +1,6 @@
+@mixin signUpActive {
+  .cont.s--signup & {
+    @content;
+  }
+}
+

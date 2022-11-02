@@ -32,6 +32,27 @@ const SignUpForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  // const toggleEl = (event) => {
+  //   document.querySelector('.img__btn').onClick('click', function() {
+  //     document.querySelector('.cont').classList.toggle('s--signup');
+  //   });
+  // };
+  
+
+  /*var Button = React.createClass({
+    shouldComponentUpdate: function(nextProps, nextState) {
+      return .cont.s--signup, {
+        content;
+        shallowCompare;
+      }
+    }
+  });*/
+
+const toggleEl = ('click', function() {
+  document.querySelector('.cont').classList.toggle('s--signup');
+});
+
+
     
     return (
       <div id="container">
@@ -68,7 +89,7 @@ const SignUpForm = ({ navigate }) => {
             <h2>One of us?</h2>
             <p>If you already has an account, just sign in. We've missed you!</p>
           </div>
-          <div className="img__btn">
+          <div className="img__btn" onClick={toggleEl}>
             <span className="m--up">Sign Up</span>
             <span className="m--in">Sign In</span>
           </div>
@@ -101,11 +122,6 @@ const SignUpForm = ({ navigate }) => {
       </div>
     );
 };
-
-
-
-
-    
 
 
 export default SignUpForm;
