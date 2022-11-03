@@ -54,7 +54,7 @@ const LogInForm = ({ navigate }) => {
             <div className="cont">
         <form onSubmit={handleSubmit}>
           <div className="form sign-in">
-            <h2>Welcome back,</h2>
+            <h2>Thank You for Signing Up, <br/>Please log-in</h2>
             <label>
               <span>Email</span>
               <input id="email" type='text' value={ email } onChange={handleEmailChange} />

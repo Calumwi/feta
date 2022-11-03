@@ -81,7 +81,7 @@ const SignUpForm = ({ navigate }) => {
         </div>
         <form onSubmit={handleSubmit}>
         <div className="form sign-up">
-          <h2>Time to feel like home,</h2>
+          <h2>Welcome To Acebook</h2>
           {/* <label>
             <span>Name</span>
             <input type="text" />
