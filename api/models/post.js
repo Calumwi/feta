@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
   message: String,
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now },
+  img:{data:Buffer,contentType: String}
 });
 
 const Post = mongoose.model("Post", PostSchema);
 
 module.exports = Post;
+
+

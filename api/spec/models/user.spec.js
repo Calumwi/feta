@@ -36,6 +36,7 @@ describe("User model", () => {
 
   it("can save a user", (done) => {
     const user = new User({
+      name: "bob",
       email: "someone@example.com",
       password: "password",
     });
