@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-  background: #ededed;
+  background: #323841;
 }
 
 input, button {
@@ -15,6 +15,8 @@ input, button {
   background: none;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
+
+
 
 /* $contW: 900px;
 $imgW: 260px;
@@ -43,7 +45,7 @@ $diffRatio: ($contW - $imgW) / $contW; */
   overflow: hidden;
   position: relative;
   width: 900px;
-  height: 550px;
+  height: 800px;
   margin: 0 auto 100px;
   background: #fff;
 }
@@ -206,10 +208,11 @@ span.title {
   cursor: pointer;
 }
 
-.img__btn:hover span{
+.img__btn:hover span {
   background-color: rgba(219, 212, 212, 0.6);
   border-radius: 30px;
 }
+
     
 .img__btn:after {
   content: '';

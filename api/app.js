@@ -7,6 +7,9 @@ const JWT = require("jsonwebtoken");
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
+const { config } = require("process");
+const { mongo } = require("mongoose");
+
 
 const app = express();
 
@@ -37,6 +40,7 @@ const tokenChecker = (req, res, next) => {
     }
   });
 };
+
 
 // route setup
 app.use("/posts", tokenChecker, postsRouter);
