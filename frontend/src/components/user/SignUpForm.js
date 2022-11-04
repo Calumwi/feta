@@ -18,10 +18,10 @@ const SignUpForm = ({ navigate }) => {
       body: JSON.stringify({ name: name, email: email, password: password, profilep: profilep })
     })
       .then(response => {
-        if(response.status === 201) {
-          navigate('/login')
-        } else {
+        if(response.status !== 201) {
           navigate('/signup')
+        } else {
+          navigate('/login')
         }
       })
   }
