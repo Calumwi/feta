@@ -7,7 +7,7 @@ import { v4 } from 'uuid';
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState("");
 
   const getPosts = () => {
     console.log('is there a token?')
@@ -35,22 +35,26 @@ const Feed = ({ navigate }) => {
     
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    let response = await fetch( '/posts', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({ message: post, date: Date.now()})
-    });
-
-    if(response.status === 201) {
-      console.log("yay")
-      getPosts();
+    console.log(post)
+    if (!post) {
+      alert("post is blank");
     } else {
-      console.log("oop")
-      // error message goes here
+      let response = await fetch( '/posts', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ message: post, date: Date.now()})
+      });
+
+      if(response.status === 201) {
+        console.log("yay")
+        getPosts();
+      } else {
+        console.log("oop")
+        // error message goes here
+      }
     }
   }
 
