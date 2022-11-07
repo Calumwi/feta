@@ -229,7 +229,7 @@ span.title {
   top: 0;
   width: 900px;
   height: 100%;
-  /* background-image: url('/Users/imisiaina/Library/CloudStorage/OneDrive-Personal/Coding/Makers/Engineering Proj II/acebook-mern-template/frontend/src/components/user/vector-feta-cheese-block-chunk-260nw-1019782465 2.jpg'); */
+  background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/sections-3.jpg');
   background-size: cover;
   transition: transform 1.2s ease-in-out;
 }
