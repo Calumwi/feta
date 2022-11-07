@@ -26,6 +26,29 @@ const SignUpForm = ({ navigate }) => {
       })
   }
 
+  const handleSubmitL = async (event) => {
+    event.preventDefault();
+
+    let response = await fetch( '/tokens', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: email, password: password })
+    })
+
+    if(response.status !== 201) {
+      console.log("oop")
+      navigate('/signup')
+      alert("Invalid Details!")
+    } else {
+      console.log("yay")
+      let data = await response.json()
+      window.localStorage.setItem("token", data.token)
+      navigate('/posts');
+    }
+  }
+
   const handleNameChange = (event) => {
     setName(event.target.value)
   }
@@ -40,6 +63,11 @@ const SignUpForm = ({ navigate }) => {
 
   const handleProfilepChange = (event) => {
    setProfilep(event.target.value)
+  }
+
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    navigate('/signup')
   }
 
 
@@ -81,59 +109,72 @@ const SignUpForm = ({ navigate }) => {
     
     return (
       <div id="container">
-        
-            <div className="cont">
-      <div className="form sign-in">
-        <h2>Welcome back,</h2>
-        <label>
-          <span>Email</span>
-          <input type="email" />
-        </label>
-        <label>
-          <span>Password</span>
-          <input type="password" />
-        </label>
-        <p className="forgot-pass">Forgot password?</p>
-        <button type="button" className="submit">Sign In</button>
-      </div>
-      <div className="sub-cont">
-        <div className="img">
-          <div className="img__text m--up">
-            <h2>New here?</h2>
-            <p>Sign up and join the world of cheese lovers!</p>
-          </div>
-          <div className="img__text m--in">
-            <h2>One of us?</h2>
-            <p>If you already has an account, just sign in. We've missed you!</p>
-          </div>
-          <div className="img__btn" onClick={toggleEl}>
-            <span className="m--up">Sign Up</span>
-            <span className="m--in">Sign In</span>
-          </div>
+        <div id="post-page">
+            <div className="topnav">
+              <div className="topnav-centered">
+                <a href="/posts" className="active">Feed</a>
+              </div>
+              <div className="topnav-right">
+                <button onClick={ logout }>Logout</button>
+              </div>
+            </div>
         </div>
-        <form onSubmit={handleSubmit}>
-        <div className="form sign-up">
-          <h2>Welcome To Acebook</h2>
-          <label>
+        
+        <div className="cont">
+      
+      <div className="form sign-in">
+      <form onSubmit={handleSubmit}>
+      <h2>Welcome To Acebook</h2>
+        <label>
             <span>Name</span>
             <input id="name" type='text' value={ name } onChange={handleNameChange} />
-          </label>
-          <label>
+        </label>
+        <label>
             <span>Email</span>
             <input id="email" type='text' value={ email } onChange={handleEmailChange} />
-          </label>
-          <label>
+        </label>
+        <label>
             <span>Password</span>
             <input id="password" type='password' value={ password } onChange={handlePasswordChange} />
           </label>
-          <form action="/upload" method="POST" enctype="multipart/form-data">
+        <p className="forgot-pass">Forgot password?</p>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
           <label>
             <span>Profile Pic:</span>
             <input type="file" name="file" id="myFile"  multiple size="50" onChange={handleProfilepChange} />
           </label>
-          </form>
+        </form>
+        <button id='submit' type="submit" className="submit" value="Submit">Sign Up</button>
+      </form>
+      </div>
+      <div className="sub-cont">
+        <div className="img">
+          <div className="img__text m--up">
+            <h2>One of us?</h2>
+            <p>If you already has an account, just sign in. We've missed you!</p>
+          </div>
+          <div className="img__text m--in">
+            <h2>New here?</h2>
+            <p>Sign up and join the world of cheese lovers!</p>
+          </div>
+          <div className="img__btn" onClick={toggleEl}>
+            <span className="m--up">Log In</span>
+            <span className="m--in">Sign Up</span>
+          </div>
+        </div>
+        <form onSubmit={handleSubmitL}>
+        <div className="form sign-up">
+          <h2>Welcome Back</h2>
+          <label>
+            <span>Email</span>
+            <input type="email" />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" />
+          </label>
+          <button id='submit' type="submit" className="submit" value="Submit">Log In</button>   
           {/* <p id="demo"></p> */}
-          <button id='submit' type="submit" className="submit" value="Submit">Sign Up</button>
         </div>
         </form>
       </div>
@@ -144,4 +185,5 @@ const SignUpForm = ({ navigate }) => {
 
 
 export default SignUpForm;
+
 

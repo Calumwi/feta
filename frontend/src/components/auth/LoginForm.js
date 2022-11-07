@@ -18,7 +18,7 @@ const LogInForm = ({ navigate }) => {
     if(response.status !== 201) {
       console.log("oop")
       navigate('/login')
-      alert("Incorrect Password!")
+      alert("Invalid Details!")
     } else {
       console.log("yay")
       let data = await response.json()
@@ -35,6 +35,11 @@ const LogInForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
 
+  const logout = () => {
+    window.localStorage.removeItem("token")
+    navigate('/signup')
+  }
+
   const toggleEl = ('click', function() {
     document.querySelector('.cont').classList.toggle('s--signup');
   });
@@ -42,15 +47,16 @@ const LogInForm = ({ navigate }) => {
 
     return (
       <div id="container">
-        {/* <div class="topnav">
-          <div class="topnav-centered">
-            <a href="/posts" class="active">Feed</a>
-          </div>
-          <div class="topnav-right">
-            <a href="/login">Login</a>
-            <a href="/logout">Logout</a>
-          </div>
-        </div> */}
+        <div id="post-page">
+            <div className="topnav">
+              <div className="topnav-centered">
+                <a href="/posts" className="active">Feed</a>
+              </div>
+              <div className="topnav-right">
+                <button onClick={ logout }>Logout</button>
+              </div>
+            </div>
+        </div>
             <div className="cont">
         <form onSubmit={handleSubmit}>
           <div className="form sign-in">
