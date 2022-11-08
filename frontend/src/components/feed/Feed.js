@@ -105,7 +105,7 @@ const Feed = ({ navigate }) => {
           <div id='feed' role="feed">
             <h1>
               {imageList.map((url) => {
-                return <img src={url} />
+                return <img src={url} alt="some pic" />
               })}
 
               {posts.map(
@@ -131,22 +131,6 @@ const Feed = ({ navigate }) => {
             
           </div>
         </div>
-        
-        {/* <a class="login-trigger" href="#" data-target="#login" data-toggle="modal">Add Post</a>
-          <div id="login" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <button data-dismiss="modal" class="close">&times;</button>
-                  <h4>Add Post</h4>
-                  <form>
-                    <input type="text" name="new-post" class="username form-control" placeholder="What do you want to say?"/>
-                    <input class="btn login" type="submit" value="Add Post" />
-                  </form>
-                </div>
-              </div>
-            </div>  
-          </div> */}
         </>
       )
     } else {
