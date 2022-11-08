@@ -13,4 +13,9 @@ describe("Post", () => {
       expect($img[0].naturalWidth).to.be.greaterThan(0)
     })
   })
+
+  it('prints the timestamp for each post', () => {
+    cy.mount(<Post post={{_id: 1, date: ISODate("2022-11-08T15:41:21.730Z")}} />);
+    cy.get('[data-cy="post"]').should('contain.text', "2022-11-08T15:41:21.730Z")
+  })
 })
