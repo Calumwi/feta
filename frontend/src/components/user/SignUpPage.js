@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import LoginPage, { LoginForm } from "../auth/LoginPage";
+import { storage } from "../app/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import NavBar from "../app/navbar";
 
 const SignUpPage = ({ navigate }) => {
   const logout = () => {
@@ -12,18 +16,10 @@ const SignUpPage = ({ navigate }) => {
   };
 
   return (
+    <>
+    <NavBar/>
     <div id="container">
       <div id="post-page">
-        <div className="topnav">
-          <div className="topnav-centered">
-            <a href="/posts" className="active">
-              Feed
-            </a>
-          </div>
-          <div className="topnav-right">
-            <button onClick={logout}>Logout</button>
-          </div>
-        </div>
       </div>
 
       <div className="cont">
@@ -53,6 +49,7 @@ const SignUpPage = ({ navigate }) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
@@ -60,7 +57,7 @@ export const SignUpForm = ({ navigate, toggleEl }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profilep, setProfilep] = useState("");
+  const [imageUpload, setimageUpload] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -74,7 +71,6 @@ export const SignUpForm = ({ navigate, toggleEl }) => {
         name: name,
         email: email,
         password: password,
-        profilep: profilep,
       }),
     }).then((response) => {
       if (response.status !== 201) {
@@ -97,8 +93,12 @@ export const SignUpForm = ({ navigate, toggleEl }) => {
     setPassword(event.target.value);
   };
 
-  const handleProfilepChange = (event) => {
-    setProfilep(event.target.value);
+  const uploadImage = () => {
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/profilepic/${imageUpload.name + v4()}`);
+    uploadBytes(imageRef, imageUpload).then(() =>
+      alert("Image Uploaded")
+    );
   };
 
   return (
@@ -136,7 +136,9 @@ export const SignUpForm = ({ navigate, toggleEl }) => {
             id="myFile"
             multiple
             size="50"
-            onChange={handleProfilepChange}
+            onChange={(event) => {
+                setimageUpload(event.target.files[0]);
+              }}
           />
         </label>
       </form>
@@ -145,6 +147,7 @@ export const SignUpForm = ({ navigate, toggleEl }) => {
         type="submit"
         className="submit"
         value="Submit"
+        onClick={uploadImage}
       >
         Sign Up
       </button>

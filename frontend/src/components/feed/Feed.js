@@ -3,6 +3,7 @@ import Post from "../post/Post";
 import { storage } from "../app/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import NavBar from "../app/navbar";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -79,19 +80,9 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
+        <NavBar/>
         <div id="post-page">
-          <div className="topnav">
-            <div className="topnav-centered">
-              <a href="/posts" className="active">
-                Feed
-              </a>
-            </div>
-            <div className="topnav-right">
-              <button onClick={logout}>Logout</button>
-            </div>
-          </div>
           <h2>Posts</h2>
-
           <h3>
             <input
               placeholder="Post"
@@ -106,7 +97,7 @@ const Feed = ({ navigate }) => {
                 setImageFile(event.target.files[0]);
               }}
             />
-            <button onClick={handleSubmit}> Post.</button>
+            <button id="submit" onClick={handleSubmit}> Post.</button>
           </h3>
 
           <div id="feed" role="feed">
@@ -118,7 +109,7 @@ const Feed = ({ navigate }) => {
       </>
     );
   } else {
-    navigate("/login");
+    navigate("/signup");
   }
 };
 

@@ -78,7 +78,7 @@ const LoginPage = ({ navigate }) => {
   
       if (response.status !== 201) {
         console.log("oop");
-        navigate("/login");
+        navigate("/signup");
         swal("Oops!", "Something went wrong!", "error");
       } else {
         console.log("yay");
