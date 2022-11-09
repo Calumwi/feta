@@ -1,142 +1,125 @@
-import React, { useEffect, useState } from 'react';
-import Post from '../post/Post'
+import React, { useEffect, useState } from "react";
+import Post from "../post/Post";
 import { storage } from "../app/firebase";
-import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage';
-import { v4 } from 'uuid';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [post, setPost] = useState("");
-
-  const getPosts = () => {
-    console.log('is there a token?')
-    console.log(token)
-    if(token) {
-      console.log('fetch request now:')
-      console.log(token)
-      fetch("/posts", {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then(response => response.json())
-        .then(async data => {
-          window.localStorage.setItem("token", data.token)
-          setToken(window.localStorage.getItem("token"))
-          setPosts(data.posts);
-        })
-    }
-  }
-
-  useEffect(() => {
-    getPosts();
-  }, [])
-    
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(post)
-    if (!post) {
-      alert("post is blank");
-    } else {
-      let response = await fetch( '/posts', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ message: post, date: Date.now()})
-      });
-
-      if(response.status === 201) {
-        console.log("yay")
-        getPosts();
-      } else {
-        console.log("oop")
-        // error message goes here
-      }
-    }
-  }
-
-  const handlePostChange = (event) => {
-    setPost(event.target.value)
-  }
+  const [imageFile, setImageFile] = useState(null);
 
   const logout = () => {
-    window.localStorage.removeItem("token")
-    navigate('/signup')
-  }
+    window.localStorage.removeItem("token");
+    navigate("/signup");
+  };
 
-  const [imageUpload, setImageUpload] = useState(null);
-  const [imageList, setImageList] = useState([]);
-
-  const imageListRef = ref(storage, "images/")
-  const uploadImage = () => {
-    if (imageUpload === null) return;
-    const imageref = ref(storage, `images/${imageUpload.name + v4()}`);
-    uploadBytes(imageref, imageUpload).then(() => {
-      alert("Image uploaded")
-    })
+  const getPosts = () => {
+    if (token) {
+      fetch("/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          window.localStorage.setItem("token", data.token);
+          setToken(window.localStorage.getItem("token"));
+          setPosts(data.posts);
+        });
+    }
   };
 
   useEffect(() => {
-    listAll(imageListRef).then((response) => {
-      response.items.forEach((item) => {
-        getDownloadURL(item).then((url) => {
-          setImageList((prev) => [...prev, url]);
-        })
-      })
-    })
-  }, [])
-  
-    if(token) {
-      return(
-        <>
+    getPosts();
+  }, []);
+
+  const sendPost = async (url) => {
+    console.log(post);
+    console.log(url);
+    let response = await fetch("/posts", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ message: post, date: Date.now(), img: url }),
+    });
+
+    if (response.status === 201) {
+      console.log("yay");
+      getPosts();
+    } else {
+      console.log("oop");
+      alert("Something went wrong with your post");
+    }
+  };
+
+  const handlePostChange = (event) => {
+    setPost(event.target.value);
+  };
+
+  const uploadImage = () => {
+    if (imageFile == null) return;
+    const imageRef = ref(storage, `images/posts/${imageFile.name + v4()}`);
+    return uploadBytes(imageRef, imageFile).then((snapshot) =>
+      getDownloadURL(snapshot.ref)
+    );
+  };
+
+  const handleSubmit = () => {
+    if (imageFile) {
+      uploadImage().then(sendPost);
+    } else {
+      sendPost();
+    }
+  };
+
+  if (token) {
+    return (
+      <>
         <div id="post-page">
           <div className="topnav">
             <div className="topnav-centered">
-              <a href="/posts" className="active">Feed</a>
+              <a href="/posts" className="active">
+                Feed
+              </a>
             </div>
             <div className="topnav-right">
-              <button onClick={ logout }>Logout</button>
+              <button onClick={logout}>Logout</button>
             </div>
           </div>
-          
-          <div id='feed' role="feed">
-            <h1>
-              {imageList.map((url) => {
-                return <img src={url} alt="some pic" />
-              })}
+          <h2>Posts</h2>
 
-              {posts.map(
-                (post) => ( <Post post={ post } key={ post._id } /> )
-              )}
+          <h3>
+            <input
+              placeholder="Post"
+              id="post"
+              type="text"
+              value={post}
+              onChange={handlePostChange}
+            />
+            <input
+              type="file"
+              onChange={(event) => {
+                setImageFile(event.target.files[0]);
+              }}
+            />
+            <button onClick={handleSubmit}> Post.</button>
+          </h3>
 
-              
-            </h1>
-          </div>
-            <br />
-          <div id="submit-post">
-            <h2>Posts</h2>
-            <h3>
-              <form onSubmit={ handleSubmit }>
-                <input placeholder='Post' id="post" type='text' value={ post } onChange={ handlePostChange } />
-                <button role='submit-button' id='submit' type="submit" value="Submit">Submit</button>
-              </form>
-            </h3>
-          </div>
-          <div id="add-img">
-            <input type="file" onChange={ (event) => {setImageUpload(event.target.files[0])}} />
-            <button id="submit" onClick={ uploadImage }>Upload Image</button>
-            
+          <div id="feed" role="feed">
+            {posts.map((post) => (
+              <Post post={post} key={post._id} />
+            ))}
           </div>
         </div>
-        </>
-      )
-    } else {
-      navigate('/login')
-    }
+      </>
+    );
+  } else {
+    navigate("/login");
   }
-
+};
 
 export default Feed;
