@@ -17,6 +17,11 @@ const Post = ({post}) => {
       <div class="post-image-container">
         <img class="post-image" src={post.img} alt='' />
       </div>
+
+      <div class="comment-container">
+        <div class="comment">{post.comments}</div>
+      </div>
+
     </article>
   )
 }
