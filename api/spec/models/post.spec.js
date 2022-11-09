@@ -1,3 +1,4 @@
+
 var mongoose = require("mongoose");
 
 require("../mongodb_helper");
@@ -33,6 +34,21 @@ describe("Post model", () => {
         expect(err).toBeNull();
 
         expect(posts[0]).toMatchObject({ message: "some message" });
+        done();
+      });
+    });
+  });
+
+  it("can save a comment inside a post", (done) => {
+    var post = new Post({ message: "some message", comments: "some comment"});
+    
+    post.save((err) => {
+      expect(err).toBeNull();
+
+      Post.find((err, posts) => {
+        expect(err).toBeNull();
+
+        expect(posts[0]).toMatchObject({ message: "some message", comments: "some comment" });
         done();
       });
     });
