@@ -29,16 +29,16 @@ export const NavBar = () => {
     <>
       <nav>
         <div className="topnav-left">
-          <img src="feta_logo_1.png" alt="profilePic" className="feta-logo" />
+          <img src="feta_logo_2.png" alt="profilePic" className="feta-logo" />
           <ul>
             <li>
-              <img src="logo192.png" alt="" />
+              <img src="/images/notification.png" alt="" />
             </li>
             <li>
-              <img src="logo192.png" alt="" />
+              <img src="/images/inbox.png" alt="" />
             </li>
             <li>
-              <img src="logo192.png" alt="" />
+              <img src="/images/video.png" alt="" />
             </li>
           </ul>
         </div>

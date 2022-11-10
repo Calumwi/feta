@@ -4,11 +4,15 @@ nav {
   justify-content: space-between;
   background: #48515d;
   padding: 5px 5%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .feta-logo {
   width: 40px;
   margin-right: 48px;
+  border-radius: 30%;
 }
 
 .topnav-left, .topnav-right {

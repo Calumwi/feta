@@ -17,7 +17,7 @@ const SignUpPage = ({ navigate }) => {
 
   return (
     <>
-    <NavBar/>
+    {/* <NavBar/> */}
     <div id="container">
       <div id="post-page">
       </div>
