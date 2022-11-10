@@ -30,6 +30,10 @@ nav {
   margin: 0 15px;
 }
 
+.topnav-left ul li:hover{
+  cursor: pointer;
+}
+
 .nav-user-icon .nav-icon-img {
   width: 40px;
   border-radius: 50%;

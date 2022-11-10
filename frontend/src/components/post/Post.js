@@ -111,7 +111,7 @@ const Post = ({ post }) => {
             onChange={handleCommentChange}
           />
           <button id="submitc" onClick={sendComment}>
-            Send
+            Post Comment
           </button>
         </div>
       </div>
