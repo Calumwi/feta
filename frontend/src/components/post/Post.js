@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
+import './Post.css'
+import { storage } from "../app/firebase";
+import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import Comment from '../comment/Comment';
 
 
+
 const Post = ({post}) => {
+  const moment = require('moment');
+  let now = moment(post.date);
+
+  const [imageList, setImageList] = useState([]);
+  const imageListRef = ref(storage, `images/profilepic/defaultprofilepics/`);
   const [comments, setComments] = useState([]);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [comment, setComment] = useState("");
@@ -24,8 +33,15 @@ const Post = ({post}) => {
   };
 
   useEffect(() => {
-    getComments();
-  }, []);
+    listAll(imageListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          setImageList([url]);
+          getComments();
+        }, []);
+      });
+    });
+  });
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
@@ -51,20 +67,27 @@ const Post = ({post}) => {
       alert("Something went wrong with your comment");
     }
   };
-  
 
   return (
     <article data-cy="post" key={post._id}>
       <div class="header-container"> 
-      {/* profile picture goes in here probably */}
-        <div class="name-and-time-container">
-          {/* <div class="name">{post.user}</div> */}
-          <div class="timestamp">{post.date}</div>
-        </div>
+      <div className="user-profile">
+          {imageList.map((url) => {
+            return (
+              <img className="nav-icon-img" src={url} alt="ProfilePic" />
+            );
+          })}
+      </div>
+      <p>Username Placeholder</p>
+     
       </div>
 
       <div class="message-container">
         <div class="message">{post.message}</div>
+      </div>
+
+      <div class="name-and-time-container">
+          <span>{now.format("dddd, MMM Do YYYY, h:mm a")}</span>
       </div>
       
       <div class="post-image-container">
