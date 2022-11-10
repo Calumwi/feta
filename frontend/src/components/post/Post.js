@@ -18,7 +18,7 @@ const Post = ({post}) => {
 
   const getComments = (id) => {
     if (token) {
-      fetch(`/comment?post_id=${id}`, {
+      fetch(`/comments?post_id=${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -37,7 +37,7 @@ const Post = ({post}) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
           setImageList([url]);
-          getComments();
+          // getComments();
         }, []);
       });
     });
@@ -48,20 +48,19 @@ const Post = ({post}) => {
   };
 
   const sendComment = async (url) => {
-    console.log(post);
-    console.log(url);
-    let response = await fetch("/comment", {
+    console.log(comment);
+    let response = await fetch("/comments", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: comment, date: Date.now() }),
+      body: JSON.stringify({ message: comment, date: Date.now(), post: post._id }),
     });
 
     if (response.status === 201) {
       console.log("yay");
-      getComments();
+      getComments(post._id);
     } else {
       console.log("oop");
       alert("Something went wrong with your comment");
