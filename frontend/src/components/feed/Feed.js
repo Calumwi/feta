@@ -5,6 +5,7 @@ import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { v4 } from "uuid";
 import NavBar from "../app/navbar";
 import "./Feed.css";
+import swal from "sweetalert";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -67,7 +68,7 @@ const Feed = ({ navigate }) => {
       getPosts();
     } else {
       console.log("oop");
-      alert("Something went wrong with your post");
+      swal("Something went wrong with your post");
     }
   };
 
@@ -157,7 +158,7 @@ const Feed = ({ navigate }) => {
                 <h3>
                   <textarea
                     rows="3"
-                    placeholder="Whats's on your mind?"
+                    placeholder="What's on your mind?"
                     id="post"
                     type="text"
                     value={post}

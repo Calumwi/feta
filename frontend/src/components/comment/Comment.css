@@ -1,0 +1,33 @@
+.timestamp span {
+  font-size: 13px;
+  color: #9a9a9a;
+  padding-left: 400px;
+}
+
+.all-comments {
+  border-radius: 4px;
+}
+
+.user-profilec {
+  display: flex;
+  align-items: center;
+}
+
+.user-profilec img {
+  width: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.user-profilec p {
+  margin-bottom: -5px;
+  font-weight: 500;
+  color: #626262;
+  font-size: smaller;
+}
+
+.cmessage {
+  font-size: smaller;
+  padding-right: 400px;
+}
+

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import './Post.css'
+import "./Post.css";
 import { storage } from "../app/firebase";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
-import Comment from '../comment/Comment';
+import swal from "sweetalert";
 
 
+import Comment from "../comment/Comment";
 
-const Post = ({post}) => {
-  const moment = require('moment');
+const Post = ({ post }) => {
+  const moment = require("moment");
   let now = moment(post.date);
 
   const [imageList, setImageList] = useState([]);
@@ -37,8 +38,7 @@ const Post = ({post}) => {
       response.items.forEach((item) => {
         getDownloadURL(item).then((url) => {
           setImageList([url]);
-          // getComments();
-        }, []);
+        });
       });
     });
   });
@@ -55,7 +55,11 @@ const Post = ({post}) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ message: comment, date: Date.now(), post: post._id }),
+      body: JSON.stringify({
+        message: comment,
+        date: Date.now(),
+        post: post._id,
+      }),
     });
 
     if (response.status === 201) {
@@ -63,59 +67,64 @@ const Post = ({post}) => {
       getComments(post._id);
     } else {
       console.log("oop");
-      alert("Something went wrong with your comment");
+      swal("Something went wrong with your comment");
     }
   };
 
   return (
     <article data-cy="post" key={post._id}>
-      <div class="header-container"> 
-      <div className="user-profile">
+      <div class="post-container">
+        <div className="user-profile">
           {imageList.map((url) => {
-            return (
-              <img className="nav-icon-img" src={url} alt="ProfilePic" />
-            );
+            return <img className="nav-icon-img" src={url} alt="ProfilePic" />;
           })}
-      </div>
-      <p>Username Placeholder</p>
-     
+          <div>
+            <p>User placeholder</p>
+          </div>
+        </div>
       </div>
 
       <div class="message-container">
         <div class="message">{post.message}</div>
       </div>
 
-      <div class="name-and-time-container">
-          <span>{now.format("dddd, MMM Do YYYY, h:mm a")}</span>
-      </div>
-      
       <div class="post-image-container">
-        <img class="post-image" src={post.img} alt='' />
+        <img class="post-image" src={post.img} alt="" />
+      </div>
+
+      <div class="name-and-time-container">
+        <span>{now.format("ddd, hA")}</span>
+      </div>
+      <div className="post-row">
+        <div className="add-likes">
+            <div><img src="feta_like.png" alt="" /></div> 
+        </div>
       </div>
 
       <div class="comment-box-container">
         <div class="comment-box">
-            <input
-              placeholder="Disagree here"
-              id="comment"
-              type="text"
-              value={comment}
-              onChange={handleCommentChange}
-            />
-            <button onClick={sendComment}> send </button>
-            </div>
+          <textarea
+            placeholder="Disagree here"
+            id="comment"
+            type="text"
+            value={comment}
+            onChange={handleCommentChange}
+          />
+          <button id="submitc" onClick={sendComment}>
+            Send
+          </button>
+        </div>
       </div>
 
       <div class="comment-container">
         <div id="commentfeed" role="feed">
-            {comments.map((comment) => (
-              <Comment comment={comment} key={comment._id} />
-            ))}
-          </div>
+          {comments.map((comment) => (
+            <Comment comment={comment} key={comment._id} />
+          ))}
+        </div>
       </div>
-
     </article>
-  )
-}
+  );
+};
 
 export default Post;
