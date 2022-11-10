@@ -7,6 +7,7 @@ const JWT = require("jsonwebtoken");
 const postsRouter = require("./routes/posts");
 const tokensRouter = require("./routes/tokens");
 const usersRouter = require("./routes/users");
+const commentsRouter = require("./routes/comments");
 const { config } = require("process");
 const { mongo } = require("mongoose");
 
@@ -32,7 +33,6 @@ const tokenChecker = (req, res, next) => {
 
   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if(err) {
-      console.log(err)
       res.status(401).json({message: "auth error"});
     } else {
       req.user_id = payload.user_id;
@@ -46,6 +46,7 @@ const tokenChecker = (req, res, next) => {
 app.use("/posts", tokenChecker, postsRouter);
 app.use("/tokens", tokensRouter);
 app.use("/users", usersRouter);
+app.use("/comments", tokenChecker, commentsRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

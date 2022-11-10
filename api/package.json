@@ -28,6 +28,7 @@
     "nodemon": "^2.0.15",
     "superagent": "^8.0.0",
     "supertest": "^6.2.4",
+    "sweetalert": "^2.1.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

@@ -1,9 +1,9 @@
-import SignUpForm from './SignUpForm'
+import SignUpPage from './SignUpPage'
 const navigate = () => {}
 
 describe("Signing up", () => {
   it("calls the /users endpoint", () => {
-    cy.mount(<SignUpForm navigate={navigate}/>)
+    cy.mount(<SignUpPage navigate={navigate}/>)
 
     cy.intercept('POST', '/users', { message: "OK" }).as("signUpRequest")
 
