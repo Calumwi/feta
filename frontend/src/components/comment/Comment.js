@@ -28,14 +28,13 @@ const Comment = ({ comment }) => {
             return <img className="nav-icon-img" src={url} alt="ProfilePic" />;
           })}
           <div>
-            <p>Username Placeholder</p>
+            <p>Gromit</p>
           </div>
         </div>
         <div className="message-container">
           <div className="cmessage">{comment.message}</div>
         </div>
         <div class="name-and-time-container">
-          {/* <div class="name">{post.user}</div> */}
           <div className="timestamp">
             <span>{now.format("ddd, hA")}</span>
           </div>

@@ -78,7 +78,7 @@ const Post = ({ post }) => {
             return <img className="nav-icon-img" src={url} alt="ProfilePic" />;
           })}
           <div>
-            <p>User placeholder</p>
+            <p>Wallace</p>
           </div>
         </div>
       </div>

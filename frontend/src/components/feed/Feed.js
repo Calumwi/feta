@@ -150,7 +150,7 @@ const Feed = ({ navigate }) => {
                   );
                 })}
                 <div>
-                  <p>Username placeholder</p>
+                  <p>Gromit</p>
                   <small>Public</small>
                 </div>
               </div>
