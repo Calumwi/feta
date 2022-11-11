@@ -1,7 +1,6 @@
 import "./App.css";
 import LoginForm from "../auth/LoginPage";
 import SignUpForm from "../user/SignUpPage";
-import React, { useState } from "react";
 import Feed from "../feed/Feed";
 import { useNavigate, Routes, Route } from "react-router-dom";
 
