@@ -44,16 +44,16 @@
 
 .seecomm {
   display: block;
-   margin: 0 auto;
-   width: 260px;
-   height: 36px;
-   border-radius: 30px;
-   color: #fff;
-   font-size: 15px;
-   cursor: pointer;
- }
+  margin: 0 auto;
+  width: 260px;
+  height: 36px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
 
- .add-likes {
+.add-likes {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -73,7 +73,7 @@
   width: 18px;
   margin-right: 30px;
   margin-left: 415px;
-  margin-top: -40px
+  margin-top: -40px;
 }
 
 .add-likes div {

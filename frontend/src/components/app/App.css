@@ -1,42 +1,22 @@
-  /* ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-  display: inline;
-  float: left;
-}
-
-a {
-  display: block;
-  padding: 8px;
-  background-color: #000000;
-  color: #0060B6;
-  text-decoration: none;
-} */
-
 a:hover {
-    color:#00A0C6; 
-    text-decoration:none; 
-    cursor:pointer;  
+  color: #00a0c6;
+  text-decoration: none;
+  cursor: pointer;
 }
 
-
-
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
   background: #323841;
   text-align: center;
 }
-
 
 #submit {
   margin-top: 40px;
@@ -45,11 +25,12 @@ body {
   text-transform: uppercase;
 }
 
-input, button {
+input,
+button {
   border: none;
   outline: none;
   background: none;
-  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
 /* $contW: 900px;
@@ -67,7 +48,6 @@ $diffRatio: ($contW - $imgW) / $contW; */
     @content;
   }
 } */
-
 
 .tip {
   font-size: 20px;
@@ -104,7 +84,7 @@ $diffRatio: ($contW - $imgW) / $contW; */
   transition: transform 1.2s ease-in-out;
 }
 
-.cont.s--signup .sub-cont { 
+.cont.s--signup .sub-cont {
   transform: translate3d(-640px, 0, 0);
 }
 
@@ -138,7 +118,7 @@ button#login-page-btn {
 }
 span.title {
   font-weight: 800;
-  color: #FF5A5F;
+  color: #ff5a5f;
 }
 
 .img {
@@ -153,32 +133,30 @@ span.title {
 }
 
 .img:before {
-  content: '';
+  content: "";
   position: absolute;
   right: 0;
   top: 0;
   width: 900px;
   height: 100%;
-  background-image: url('../../../public/feta_logo_2.png');
+  background-image: url("../../../public/feta_logo_2.png");
   background-size: cover;
   transition: transform 1.2s ease-in-out;
 }
 
 .img:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
 }
-
 
 .cont.s--signup .img:before {
-  transform: translate3d(640px,0,0);
+  transform: translate3d(640px, 0, 0);
 }
-
 
 .img__text {
   z-index: 2;
@@ -216,8 +194,7 @@ span.title {
 
 .cont.s--signup .img__text.m--up {
   transform: translateX(520px);
-  }
-
+}
 
 .img__text.m--in {
   transform: translateX(-520px);
@@ -226,7 +203,6 @@ span.title {
 .cont.s--signup .img__text.m--in {
   transform: translateX(0);
 }
-  
 
 .img__btn {
   overflow: hidden;
@@ -247,9 +223,8 @@ span.title {
   border-radius: 30px;
 }
 
-    
 .img__btn:after {
-  content: '';
+  content: "";
   z-index: 2;
   position: absolute;
   left: 0;
@@ -271,19 +246,18 @@ span.title {
   height: 100%;
   transition: transform 1.2s;
 }
-      
+
 .img__btn span.m--in {
   transform: translateY(-72px);
 }
-  
+
 .cont.s--signup .img__btn span.m--in {
   transform: translateY(0);
 }
-      
+
 .cont.s--signup .img__btn span.m--up {
   transform: translateY(72px);
 }
-    
 
 h2 {
   width: 100%;
@@ -304,14 +278,13 @@ label span {
   text-transform: uppercase;
 }
 
-
 input {
   display: block;
   width: 100%;
   margin-top: 5px;
   padding-bottom: 5px;
   font-size: 16px;
-  border-bottom: 1px solid rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   text-align: center;
 }
 
@@ -334,7 +307,7 @@ input {
 }
 
 .submit:hover {
-  background-color: rgba(219, 212, 212, 0.6)
+  background-color: rgba(219, 212, 212, 0.6);
 }
 
 .fb-btn {
@@ -351,7 +324,7 @@ input {
   transition-timing-function: 1.2s ease-out;
 }
 
-.cont.s--signup .sign-in { 
+.cont.s--signup .sign-in {
   transition-timing-function: ease-in-out;
   transition-duration: 1.2s;
   transform: translate3d(640px, 0, 0);
@@ -361,35 +334,19 @@ input {
   transform: translate3d(-900px, 0, 0);
 }
 
-.cont.s--signup .sign-up { 
+.cont.s--signup .sign-up {
   transform: translate3d(0, 0, 0);
 }
 
 /*Form*/
- /*Trigger Button*/
- .login-trigger {
+/*Trigger Button*/
+.login-trigger {
   font-weight: bold;
   color: #fff;
-  background: linear-gradient(to bottom right, #B05574, #F87E7B);
+  background: linear-gradient(to bottom right, #b05574, #f87e7b);
   padding: 15px 30px;
   border-radius: 30px;
-  position: relative; 
+  position: relative;
   top: 50%;
 }
 
-/* .icon-link {
-  position: absolute;
-  left: 5px;
-  bottom: 5px;
-  width: 32px;
-}
-
-.icon-link img {
-  width: 100%;
-  vertical-align: top;
-}
-
-.icon-link img.--twitter {
-  left: auto;
-  right: 5px;
-} */

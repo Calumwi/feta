@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { storage } from "../app/firebase";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
-import './Comment.css'
+import "./Comment.css";
 
 const Comment = ({ comment }) => {
   const [imageList, setImageList] = useState([]);

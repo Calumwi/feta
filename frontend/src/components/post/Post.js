@@ -4,7 +4,6 @@ import { storage } from "../app/firebase";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import swal from "sweetalert";
 
-
 import Comment from "../comment/Comment";
 
 const Post = ({ post }) => {
@@ -97,7 +96,9 @@ const Post = ({ post }) => {
       </div>
       <div className="post-row">
         <div className="add-likes">
-            <div><img src="feta_like.png" alt="" /></div> 
+          <div>
+            <img src="feta_like.png" alt="" />
+          </div>
         </div>
       </div>
 

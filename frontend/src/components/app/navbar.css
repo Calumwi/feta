@@ -15,9 +15,10 @@ nav {
   border-radius: 30%;
 }
 
-.topnav-left, .topnav-right {
+.topnav-left,
+.topnav-right {
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .topnav-left ul li {
@@ -30,7 +31,7 @@ nav {
   margin: 0 15px;
 }
 
-.topnav-left ul li:hover{
+.topnav-left ul li:hover {
   cursor: pointer;
 }
 
@@ -70,7 +71,7 @@ nav {
 }
 
 .online::after {
-  content: '';
+  content: "";
   width: 10px;
   height: 9px;
   border: 2px solid #fff;

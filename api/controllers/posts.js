@@ -8,9 +8,9 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ posts: posts, token: token });
-    }).sort({ _id : -1 });
+    }).sort({ _id: -1 });
   },
   Create: (req, res) => {
     const post = new Post(req.body);
@@ -19,8 +19,8 @@ const PostsController = {
         throw err;
       }
 
-      const token = await TokenGenerator.jsonwebtoken(req.user_id)
-      res.status(201).json({ message: 'OK', token: token });
+      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      res.status(201).json({ message: "OK", token: token });
     });
   },
 };
