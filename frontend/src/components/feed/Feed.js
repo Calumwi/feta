@@ -5,6 +5,7 @@ import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import { v4 } from "uuid";
 import NavBar from "../app/navbar";
 import "./Feed.css";
+import swal from "sweetalert";
 
 const Feed = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -67,7 +68,7 @@ const Feed = ({ navigate }) => {
       getPosts();
     } else {
       console.log("oop");
-      alert("Something went wrong with your post");
+      swal("Something went wrong with your post");
     }
   };
 
@@ -94,7 +95,7 @@ const Feed = ({ navigate }) => {
   if (token) {
     return (
       <>
-        <NavBar />
+        <NavBar navigate={navigate} logout={logout}/>
         <div className="feed-container">
           <div className="left-sidebar">
             <div className="imp-links">
@@ -157,7 +158,7 @@ const Feed = ({ navigate }) => {
                 <h3>
                   <textarea
                     rows="3"
-                    placeholder="Whats's on your mind?"
+                    placeholder="What's on your mind?"
                     id="post"
                     type="text"
                     value={post}
@@ -169,12 +170,18 @@ const Feed = ({ navigate }) => {
                       Live Video
                     </a>
                     <a href="#">
-                      <input
-                        type="file"
-                        onChange={(event) => {
-                          setImageFile(event.target.files[0]);
-                        }}
-                      />
+                      <div className="image-upload">
+                      <label for="file-input">
+                        <img src="images/photo.png" alt="" />
+                      </label>
+                        <input
+                          id="file-input"
+                          type="file"
+                          onChange={(event) => {
+                            setImageFile(event.target.files[0]);
+                          }}
+                        />
+                      </div>
                       Photos
                     </a>
                     <a href="#">
@@ -182,12 +189,6 @@ const Feed = ({ navigate }) => {
                       Feeling/Activity
                     </a>
                   </div>
-                  {/* <input
-                    type="file"
-                    onChange={(event) => {
-                      setImageFile(event.target.files[0]);
-                    }}
-                  /> */}
                   <button id="submit" onClick={handleSubmit}>
                     {" "}
                     Post
@@ -196,17 +197,6 @@ const Feed = ({ navigate }) => {
               </div>
             </div>
             <div className="post-container">
-              {/* <div className="user-profile">
-                {imageList.map((url) => {
-                  return (
-                    <img className="nav-icon-img" src={url} alt="ProfilePic" />
-                  );
-                })}
-                <div>
-                  <p>Username Placeholder</p>
-                  <span></span>
-                </div>
-              </div> */}
               <div id="feed" role="feed">
                 {posts.map((post) => (
                   <Post post={post} key={post._id} />

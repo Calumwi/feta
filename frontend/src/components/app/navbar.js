@@ -4,16 +4,10 @@ import { storage } from "../app/firebase";
 import { v4 } from "uuid";
 import "./navbar.css";
 
-export const NavBar = () => {
-  // const [imageFile, setImageFile] = useState(null);
+export const NavBar = ({ logout }) => {
   const [imageList, setImageList] = useState([]);
 
   const imageListRef = ref(storage, `images/profilepic/defaultprofilepics/`);
-
-  const logout = ({ navigate }) => {
-    window.localStorage.removeItem("token");
-    navigate("/signup");
-  };
 
   useEffect(() => {
     listAll(imageListRef).then((response) => {
@@ -46,14 +40,16 @@ export const NavBar = () => {
         <div className="topnav-right">
           <div className="search-box">
             <img src="search-icon-png-21.png" alt="" />
-            <input type="text" placeholder="Search"/>
+            <input type="text" placeholder="Search" />
           </div>
           <div className="nav-user-icon online">
-              {imageList.map((url) => {
-                return <img className="nav-icon-img" src={url} alt="ProfilePic" />;
-              })}
+            {imageList.map((url) => {
+              return (
+                <img className="nav-icon-img" src={url} alt="ProfilePic" />
+              );
+            })}
           </div>
-          {/* <button onClick={logout}>Logout</button> */}
+          <button onClick={logout}>Logout</button>
         </div>
       </nav>
     </>

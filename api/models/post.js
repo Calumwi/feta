@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-// const moment = require('moment');
-// let now = moment();
-
 const PostSchema = new mongoose.Schema({
   message: String,
   date: { type: Date, default: Date.now },
@@ -12,5 +9,3 @@ const PostSchema = new mongoose.Schema({
 const Post = mongoose.model("Post", PostSchema);
 
 module.exports = Post;
-
-

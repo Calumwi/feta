@@ -1,6 +1,100 @@
 .name-and-time-container span {
   font-size: 13px;
   color: #9a9a9a;
-  
+  padding-left: 400px;
 }
 
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.post-container {
+  width: 100%;
+  background: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  color: #626262;
+  margin: 10px 0;
+}
+
+.post-input-container {
+  padding-left: 55px;
+  padding-top: 20px;
+}
+
+.post-image-container {
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.comment-box-container textarea {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  /* border-bottom: 1px solid #ccc; */
+  background: transparent;
+  resize: none;
+}
+
+.seecomm {
+  display: block;
+  margin: 0 auto;
+  width: 260px;
+  height: 36px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.add-likes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.add-likes a {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: #626262;
+  margin-right: 30px;
+  font-size: 13px;
+}
+
+.add-likes div img {
+  width: 18px;
+  margin-right: 30px;
+  margin-left: 415px;
+  margin-top: -40px;
+}
+
+.add-likes div {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 40px;
+}
+
+.add-likes :hover {
+  cursor: pointer;
+}
+
+button#submitc {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  background: #ead320;
+  text-transform: uppercase;
+  width: 150px;
+  height: 36px;
+}
+
+.comment-box {
+  border-bottom: 1px solid #ccc;
+}
