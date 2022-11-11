@@ -1,7 +1,14 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  message: String,
+  message: {
+    type: String,
+    validate: {
+      validator: function (v) {
+        return /^[a-zA-Z0-9~!@#()`;\-':,.?| ]*$/; //no <>
+      },
+    },
+  },
   date: { type: Date, default: Date.now },
   img: String,
 });
