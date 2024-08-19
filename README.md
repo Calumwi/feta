@@ -48,7 +48,7 @@ We also used...
 
 This application is comprised of two distinct pieces.
 
-- An backend API built with Express
+- A backend API built with Express
 - A front end built with React
 
 The React front end sends HTTP requests to the backend API and receives JSON in response body, rather than a whole page of HTML.
